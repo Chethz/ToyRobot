@@ -17,7 +17,8 @@ namespace ToyRobotSimulator
 
             var stopApplication = false;
             Console.WriteLine("Toy Robot Simulator Started");
-            Console.WriteLine("Please place robot to start simulator");
+            Console.WriteLine("Please place robot to start simulator"); 
+            Console.WriteLine("----------------------------------------------- \n");
             do
             {
                 var command = Console.ReadLine();
