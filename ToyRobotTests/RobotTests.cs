@@ -77,7 +77,7 @@ namespace ToyRobotTests
         }
 
         [Fact]
-        public void PlaceRobot_WhenInValidFace_ReturnException()
+        public void PlaceRobot_WhenEmptyFace_ReturnException()
         {
             ITable table = new Table(5, 5);
             IReport report = new Report();
@@ -89,6 +89,21 @@ namespace ToyRobotTests
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Empty face command", exception.Message);
+        }
+
+        [Fact]
+        public void PlaceRobot_WhenInValidFace_ReturnException()
+        {
+            ITable table = new Table(5, 5);
+            IReport report = new Report();
+            IMove move = new Move();
+            IRobot robot = new Robot(table, move, report);
+
+            Action result = () => robot.PlaceRobot(3, 3, "FACE");
+
+            Exception exception = Assert.Throws<Exception>(result);
+
+            Assert.Equal("Invalid face command : FACE", exception.Message);
         }
 
         [Fact]
@@ -163,7 +178,7 @@ namespace ToyRobotTests
         }
 
         [Fact]
-        public void TurnRobot_WhenInvaliTurnCommandGiven_ReturnException()
+        public void TurnRobot_WhenInvalidTurnCommandGiven_ReturnException()
         {
             ITable table = new Table(5, 5);
             IReport report = new Report();
@@ -174,7 +189,22 @@ namespace ToyRobotTests
             Action result = () => robot.TurnRobot("RIGGHT");
             Exception exception = Assert.Throws<Exception>(result);
 
-            Assert.Equal("Invalid command : RIGGHT", exception.Message);
+            Assert.Equal("Invalid turn command : RIGGHT", exception.Message);
+        }
+
+        [Fact]
+        public void TurnRobot_WhenInvalidleftTurnCommandGiven_ReturnException()
+        {
+            ITable table = new Table(5, 5);
+            IReport report = new Report();
+            IMove move = new Move();
+            IRobot robot = new Robot(table, move, report);
+
+            robot.PlaceRobot(3, 3, "NORTH");
+            Action result = () => robot.TurnRobot("LEF");
+            Exception exception = Assert.Throws<Exception>(result);
+
+            Assert.Equal("Invalid turn command : LEF", exception.Message);
         }
 
         [Fact]
