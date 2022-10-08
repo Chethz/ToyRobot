@@ -1,13 +1,13 @@
 # TOY ROBOT SIMULATOR
 
-About Simulator
+## About Simulator
 
 The library simulates a toy robot moving on a square 5 x 5 table without any obstructions. To start the simulator, the robot has to be placed on the table. 
 However, all the movements until the robot is placed on the table surface are ignored. The robot is free to roam around the table and is programmed to prevent it from falling off the 
 table. Valid movements that cause the robot to fall off the table are ignored but further moves are still allowed. Library read inputs
 as commands line inputs.
 
-Sample commands should be in the following format:
+## Sample commands should be in the following format:
 
 PLACE X,Y,DIRECTION
 MOVE
@@ -28,8 +28,7 @@ REPORT: will announce the X, Y and orientation of the robot.
 
 A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands.
 
-Example Input and Output:
-
+## Example Input and Output:
 
 PLACE 0, 0, NORTH
 MOVE
@@ -52,15 +51,15 @@ REPORT
 
 Output: 3, 3, NORTH
 
-Running the solution:
+## Running the solution:
 
 The application is written in Visual Studio 2022. The application is a .Net Core 3.1 application. RobotLibrary 
 contains all the functionalities of the robot. A robot Simulator is used to pass the given command to the robot. When
 you run the console application, commands will be executed automatically and output displayed on the console window.
 
-Running Unit Tests:
+## Running Unit Tests:
 
 Tests are running using xUnit V 2.4.0 and xUnit runner V 2.4.0 NuGet packages.
 
-Supporting Operating system:
+## Supporting Operating system:
 This application was tested on Windows 11 Pro.
