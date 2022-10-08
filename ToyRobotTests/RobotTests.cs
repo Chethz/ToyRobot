@@ -73,7 +73,7 @@ namespace ToyRobotTests
 
             Exception exception = Assert.Throws<Exception>(result);
 
-            Assert.Equal("Invalid position", exception.Message);
+            Assert.Equal("Can't place the robot on the table, Invalid position", exception.Message);
         }
 
         [Fact]
@@ -89,6 +89,36 @@ namespace ToyRobotTests
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Empty face command", exception.Message);
+        }
+
+        [Fact]
+        public void Move_WhenIsPlacedFalse_ReturnNegetiveOne()
+        {
+            ITable table = new Table(5, 5);
+            IReport report = new Report();
+            IMove move = new Move();
+            IRobot robot = new Robot(table, move, report);
+
+            robot.Move();
+
+            Assert.Equal(-1, robot.XPosition);
+        }
+
+        [Fact]
+        public void Move_WhenInvalidPosition_ReturnException()
+        {
+            ITable table = new Table(5, 5);
+            IReport report = new Report();
+            IMove move = new Move();
+            IRobot robot = new Robot(table, move, report);
+
+            robot.PlaceRobot(5, 5, "NORTH");
+
+            Action result = () => robot.Move();
+
+            Exception exception = Assert.Throws<Exception>(result);
+
+            Assert.Equal("Cannot move in to requested position.", exception.Message);
         }
 
         [Fact]
@@ -159,7 +189,7 @@ namespace ToyRobotTests
             Action result = () => robot.TurnRobot("");
             Exception exception = Assert.Throws<Exception>(result);
 
-            Assert.Equal("Empty command", exception.Message);
+            Assert.Equal("Empty turn command", exception.Message);
         }
     }
 }
