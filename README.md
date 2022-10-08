@@ -1,6 +1,6 @@
 # TOY ROBOT SIMULATOR
 
-About Simulator
+# About Simulator
 
 The library simulates a toy robot moving on a square 5 x 5 table without any obstructions. To start the simulator, the robot has to be placed on the table. 
 However, all the movements until the robot is placed on the table surface are ignored. The robot is free to roam around the table and is programmed to prevent it from falling off the 
