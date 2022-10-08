@@ -3,6 +3,8 @@ using ToyRobot;
 using ToyRobot.Interfaces;
 using Xunit;
 using System;
+using ToyRobot.Enums;
+using System.IO;
 
 namespace ToyRobotSimulatorTests
 {
@@ -39,6 +41,21 @@ namespace ToyRobotSimulatorTests
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Invalid place command.", exception.Message);
+        }
+
+        [Fact]
+        public void ProcessCommand_WhenPassedPlaceCommandWithTab_PlacedRobot()
+        {
+            ITable table = new Table(5, 5);
+            IMove move = new Move();
+            IReport report = new Report();
+            IRobot robot = new Robot(table, move, report);
+
+            var Simulator = new Simulator(table, robot);
+
+            Simulator.ProcessCommand("PLACE   2, 3, NORTH");
+
+            Assert.Equal(2, robot.XPosition);
         }
 
 

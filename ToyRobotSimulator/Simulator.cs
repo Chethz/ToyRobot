@@ -29,6 +29,7 @@ namespace ToyRobotSimulator
 
             if (place.IsMatch(commands))
             {
+                commands = commands.Substring(5).Trim();
                 ParsePlaceCommand(commands);
             }
             else if (move.IsMatch(commands))
@@ -56,16 +57,16 @@ namespace ToyRobotSimulator
 
         private void ParsePlaceCommand(string command)
         {
-            string[] coordinates = command.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] coordinates = command.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (coordinates.Length == 4)
+            if (coordinates.Length == 3)
             {
                 int x;
                 int y;
 
-                if (int.TryParse(coordinates[1], out x) && int.TryParse(coordinates[2], out y) && coordinates[3] != null)
+                if (int.TryParse(coordinates[0], out x) && int.TryParse(coordinates[1], out y) && coordinates[2] != null)
                 {
-                    _robot.PlaceRobot(x, y, coordinates[3]);
+                    _robot.PlaceRobot(x, y, coordinates[2]);
                 }
                 else
                 {
