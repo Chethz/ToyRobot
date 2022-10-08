@@ -12,11 +12,12 @@ namespace ToyRobot
         private int _xPosition = -1;
         private int _yPosition = -1;
         private Face _face;
-        private bool IsPlaced = false;
+        private bool _isPlaced = false;
 
         int IRobot.XPosition { get => _xPosition; set => _xPosition = value; }
         int IRobot.YPosition { get => _yPosition; set => _yPosition = value; }
         Face IRobot.Face { get => _face; set => _face = value; }
+        public bool IsPlaced { get; }
 
         public Robot(ITable table, IMove move, IReport report)
         {
@@ -27,7 +28,7 @@ namespace ToyRobot
 
         public void Move()
         {
-            if (!IsPlaced)
+            if (!_isPlaced)
             {
                 return;
             }
@@ -59,12 +60,12 @@ namespace ToyRobot
             _xPosition = x;
             _yPosition = y;
             _face = GetFace(face);
-            IsPlaced = true;
+            _isPlaced = true;
         }
 
         public void Report()
         {
-            if (IsPlaced)
+            if (_isPlaced)
             {
                 _report.Print(_xPosition, _yPosition, _face);
             }
@@ -72,7 +73,7 @@ namespace ToyRobot
 
         public void TurnRobot(string command)
         {
-            if (IsPlaced)
+            if (_isPlaced)
             {
                 Side turnCommand = GetTurnCommand(command);
 
