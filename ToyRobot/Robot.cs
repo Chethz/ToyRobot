@@ -94,56 +94,48 @@ namespace ToyRobot
 
         private Face TurnLeft(Face face)
         {
-            var newFace = face;
             switch (face)
             {
                 case Face.NORTH:
-                    newFace = Face.WEST;
-                    break;
+                    return Face.WEST;
                 case Face.SOUTH:
-                    newFace = Face.EAST;
-                    break;
+                    return Face.EAST;
                 case Face.EAST:
-                    newFace = Face.NORTH;
-                    break;
+                    return Face.NORTH;
                 case Face.WEST:
-                    newFace = Face.SOUTH;
-                    break;
+                    return Face.SOUTH;
+                default:
+                    throw new Exception("Invalid turn command : " + face);
             }
-            return newFace;
         }
 
         private Face TurnRight(Face face)
         {
-            var newFace = face;
             switch (face)
             {
                 case Face.NORTH:
-                    newFace = Face.EAST;
-                    break;
+                    return Face.EAST;
                 case Face.SOUTH:
-                    newFace = Face.WEST;
-                    break;
+                    return Face.WEST;
                 case Face.EAST:
-                    newFace = Face.SOUTH;
-                    break;
+                    return Face.SOUTH;
                 case Face.WEST:
-                    newFace = Face.NORTH;
-                    break;
+                    return Face.NORTH;
+                default: 
+                    throw new Exception("Invalid turn command : " + face);
             }
-            return newFace;
         }
 
-        private Face GetFace(string inputFace)
+        private Face GetFace(string face)
         {
-            if (string.IsNullOrEmpty(inputFace))
+            if (string.IsNullOrEmpty(face))
             {
                 throw new Exception("Empty face command");
             }
 
-            inputFace = inputFace.Trim().ToUpper();
+            face = face.Trim().ToUpper();
 
-            switch (inputFace)
+            switch (face)
             {
                 case "NORTH":
                     return Face.NORTH;
@@ -154,7 +146,7 @@ namespace ToyRobot
                 case "WEST":
                     return Face.WEST;
                 default:
-                    throw new Exception("Invalid face");
+                    throw new Exception("Invalid face command : " + face);
             }
         }
 
@@ -174,7 +166,7 @@ namespace ToyRobot
                 case "RIGHT":
                     return Side.RIGHT;
                 default:
-                    throw new Exception("Invalid command : " + command);
+                    throw new Exception("Invalid turn command : " + command);
             }
         }
     }
