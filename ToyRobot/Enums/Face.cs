@@ -4,7 +4,11 @@ using System.Text;
 
 namespace ToyRobot.Enums
 {
-    internal class Face
+    public enum Face
     {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST
     }
 }

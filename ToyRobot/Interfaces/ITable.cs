@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ToyRobot.Interfaces
 {
-    internal interface ITable
+    public interface ITable
     {
+        int Width { get; }
+        int Length { get; }
+        bool IsValidPlace(int x, int y);
     }
 }
