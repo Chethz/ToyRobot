@@ -9,8 +9,8 @@ namespace ToyRobot
         private IMove _move;
         private ITable _table;
         private IReport _report;
-        private int _xPosition;
-        private int _yPosition;
+        private int _xPosition = -1;
+        private int _yPosition = -1;
         private Face _face;
         private bool IsPlaced = false;
 
@@ -40,7 +40,7 @@ namespace ToyRobot
             }
             else
             {
-                throw new Exception("Invalid move");
+                throw new Exception("Cannot move in to requested position.");
             }
         }
 
@@ -53,7 +53,7 @@ namespace ToyRobot
 
             if (!_table.IsValidPlace(x, y))
             {
-                throw new Exception("Invalid position");
+                throw new Exception("Can't place the robot on the table, Invalid position");
             }
 
             _xPosition = x;
@@ -161,7 +161,7 @@ namespace ToyRobot
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new Exception("Empty command");
+                throw new Exception("Empty turn command");
             }
 
             command = command.Trim().ToUpper();
