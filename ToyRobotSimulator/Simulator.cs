@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using ToyRobot;
 using ToyRobot.Interfaces;
 
 namespace ToyRobotSimulator
 {
     public class Simulator
     {
-        private ITable _table;
+        private ITable _table = new Table(5, 5);
+        private IMove _move = new Move();
+        private IReport _report = new Report();
         private IRobot _robot;
 
-        public Simulator(ITable table, IRobot robot)
+        public Simulator()
         {
-            _table = table;
-            _robot = robot;
+            _robot = new Robot(_table, _move, _report);
         }
 
 
@@ -64,20 +66,19 @@ namespace ToyRobotSimulator
                 int x;
                 int y;
 
-                if (int.TryParse(coordinates[0], out x) && int.TryParse(coordinates[1], out y) && coordinates[2] != null)
+                if (int.TryParse(coordinates[0], out x) && int.TryParse(coordinates[1], out y))
                 {
                     _robot.PlaceRobot(x, y, coordinates[2]);
                 }
                 else
                 {
-                    throw new Exception("Invalid place command.");
+                    throw new Exception("Invalid X or Y command.");
                 }
             }
             else
             {
                 throw new Exception("Invalid place command.");
             }
-
         }
     }
 }

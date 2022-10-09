@@ -8,23 +8,19 @@ namespace ToyRobotSimulator
     {
         static void Main(string[] args)
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
-
-            Simulator simulator = new Simulator(table, robot);
+            Simulator simulator = new Simulator();
 
             var stopApplication = false;
             Console.WriteLine("Toy Robot Simulator Started");
-            Console.WriteLine("Please place robot to start simulator"); 
+            Console.WriteLine("Please place the robot to start the simulator. Table size is 5 x 5.");
+            Console.WriteLine("Please enter EXIT to exit the simulator");
             Console.WriteLine("----------------------------------------------- \n");
             do
             {
                 var command = Console.ReadLine();
                 if (command == null) continue;
 
-                if (command.Equals("EXIT"))
+                if (command.ToUpper().Equals("EXIT"))
                     stopApplication = true;
                 else
                 {
