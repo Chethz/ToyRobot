@@ -1,57 +1,61 @@
 ﻿using ToyRobot;
 using ToyRobot.Enums;
+using ToyRobot.Interfaces;
 using Xunit;
 
 namespace ToyRobotTests
 {
     public class MoveTests
     {
+        private IMove _move;
+
+        public MoveTests()
+        {
+            _move = new Move();
+        }
+
         [Fact]
         public void NextLocation_WhenFaceNorth_NextYSouldBeThree()
         {
-            Move move = new Move();
-            move.NextX = 2;
-            move.NextY = 2;
+            _move.NextX = 2;
+            _move.NextY = 2;
 
-            move.NextLocation(2, 2, Face.NORTH);
+            _move.NextLocation(2, 2, Face.NORTH);
 
-            Assert.True(move.NextY == 3);
+            Assert.True(_move.NextY == 3);
         }
 
         [Fact]
         public void NextLocation_WhenFaceEast_NextXSouldBeThree()
         {
-            Move move = new Move();
-            move.NextX = 2;
-            move.NextY = 2;
+            _move.NextX = 2;
+            _move.NextY = 2;
 
-            move.NextLocation(2, 2, Face.EAST);
+            _move.NextLocation(2, 2, Face.EAST);
 
-            Assert.True(move.NextX == 3);
+            Assert.True(_move.NextX == 3);
         }
 
         [Fact]
         public void NextLocation_WhenFaceSouth_NextYSouldBeOne()
         {
-            Move move = new Move();
-            move.NextX = 2;
-            move.NextY = 2;
+            _move.NextX = 2;
+            _move.NextY = 2;
 
-            move.NextLocation(2, 2, Face.SOUTH);
+            _move.NextLocation(2, 2, Face.SOUTH);
 
-            Assert.True(move.NextY == 1);
+            Assert.True(_move.NextY == 1);
         }
 
         [Fact]
         public void NextLocation_WhenFaceWest_NextXSouldBeOne()
         {
-            Move move = new Move();
-            move.NextX = 2;
-            move.NextY = 2;
+            _move.NextX = 2;
+            _move.NextY = 2;
 
-            move.NextLocation(2, 2, Face.WEST);
+            _move.NextLocation(2, 2, Face.WEST);
 
-            Assert.True(move.NextX == 1);
+            Assert.True(_move.NextX == 1);
         }
     }
 }

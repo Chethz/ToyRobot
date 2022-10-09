@@ -8,51 +8,47 @@ namespace ToyRobotTests
 {
     public class RobotTests
     {
+        private ITable _table;
+        private IReport _report;
+        private IMove _move;
+        private IRobot _robot;
+
+        public RobotTests()
+        {
+            _table = new Table(5, 5);
+            _report = new Report();
+            _move = new Move();
+            _robot = new Robot(_table, _move, _report);
+        }
+
         [Fact]
         public void PlaceRobot_XPositionIsTwo()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(2, 2, "NORTH");
 
-            robot.PlaceRobot(2, 2, "NORTH");
-
-            Assert.Equal(2, robot.XPosition);
+            Assert.Equal(2, _robot.XPosition);
         }
 
         [Fact]
         public void PlaceRobot_YPositionIsTwo()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(2, 2, "NORTH");
 
-            robot.PlaceRobot(2, 2, "NORTH");
-
-            Assert.Equal(2, robot.YPosition);
+            Assert.Equal(2, _robot.YPosition);
         }
 
         [Fact]
         public void PlaceRobot_FaceIsNorth()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(2, 2, "NORTH");
 
-            robot.PlaceRobot(2, 2, "NORTH");
-
-            Assert.Equal(Face.NORTH, robot.Face);
+            Assert.Equal(Face.NORTH, _robot.Face);
         }
 
         [Fact]
         public void PlaceRobot_WhenTableIsNull_ReturnException()
         {
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(null, move, report);
+            IRobot robot = new Robot(null, _move, _report);
 
             Action result = () => robot.PlaceRobot(2, 2, "NORTH");
 
@@ -64,12 +60,7 @@ namespace ToyRobotTests
         [Fact]
         public void PlaceRobot_WhenInValidPosition_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            Action result = () => robot.PlaceRobot(6, 6, "NORTH");
+            Action result = () => _robot.PlaceRobot(6, 6, "NORTH");
 
             Exception exception = Assert.Throws<Exception>(result);
 
@@ -79,12 +70,7 @@ namespace ToyRobotTests
         [Fact]
         public void PlaceRobot_WhenEmptyFace_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            Action result = () => robot.PlaceRobot(3, 3, "");
+            Action result = () => _robot.PlaceRobot(3, 3, "");
 
             Exception exception = Assert.Throws<Exception>(result);
 
@@ -94,12 +80,7 @@ namespace ToyRobotTests
         [Fact]
         public void PlaceRobot_WhenInValidFace_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            Action result = () => robot.PlaceRobot(3, 3, "FACE");
+            Action result = () => _robot.PlaceRobot(3, 3, "FACE");
 
             Exception exception = Assert.Throws<Exception>(result);
 
@@ -109,27 +90,17 @@ namespace ToyRobotTests
         [Fact]
         public void Move_WhenIsPlacedFalse_ReturnNegetiveOne()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.Move();
 
-            robot.Move();
-
-            Assert.Equal(-1, robot.XPosition);
+            Assert.Equal(-1, _robot.XPosition);
         }
 
         [Fact]
         public void Move_WhenInvalidPosition_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(5, 5, "NORTH");
 
-            robot.PlaceRobot(5, 5, "NORTH");
-
-            Action result = () => robot.Move();
+            Action result = () => _robot.Move();
 
             Exception exception = Assert.Throws<Exception>(result);
 
@@ -139,37 +110,25 @@ namespace ToyRobotTests
         [Fact]
         public void TurnRobot_WhenTurnLeftWhileFaceNorth_ReturnWest()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(3, 3, "NORTH");
+            _robot.TurnRobot("LEFT");
 
-            robot.PlaceRobot(3, 3, "NORTH");
-            robot.TurnRobot("LEFT");
-
-            Assert.Equal(Face.WEST, robot.Face);
+            Assert.Equal(Face.WEST, _robot.Face);
         }
 
         [Fact]
         public void TurnRobot_WhenTurnRightWhileFaceNorth_ReturnEast()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
+            _robot.PlaceRobot(3, 3, "NORTH");
+            _robot.TurnRobot("RIGHT");
 
-            robot.PlaceRobot(3, 3, "NORTH");
-            robot.TurnRobot("RIGHT");
-
-            Assert.Equal(Face.EAST, robot.Face);
+            Assert.Equal(Face.EAST, _robot.Face);
         }
 
         [Fact]
         public void TurnRobot_WhenRobotIsNotPlaced_ReturnException()
         {
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(null, move, report);
+            IRobot robot = new Robot(null, _move, _report);
 
             Action result = () => robot.TurnRobot("RIGHT");
             Exception exception = Assert.Throws<Exception>(result);
@@ -180,13 +139,8 @@ namespace ToyRobotTests
         [Fact]
         public void TurnRobot_WhenInvalidTurnCommandGiven_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            robot.PlaceRobot(3, 3, "NORTH");
-            Action result = () => robot.TurnRobot("RIGGHT");
+            _robot.PlaceRobot(3, 3, "NORTH");
+            Action result = () => _robot.TurnRobot("RIGGHT");
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Invalid turn command : RIGGHT", exception.Message);
@@ -195,13 +149,8 @@ namespace ToyRobotTests
         [Fact]
         public void TurnRobot_WhenInvalidleftTurnCommandGiven_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            robot.PlaceRobot(3, 3, "NORTH");
-            Action result = () => robot.TurnRobot("LEF");
+            _robot.PlaceRobot(3, 3, "NORTH");
+            Action result = () => _robot.TurnRobot("LEF");
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Invalid turn command : LEF", exception.Message);
@@ -210,13 +159,8 @@ namespace ToyRobotTests
         [Fact]
         public void TurnRobot_WhenNullOrEmptyCommandGiven_ReturnException()
         {
-            ITable table = new Table(5, 5);
-            IReport report = new Report();
-            IMove move = new Move();
-            IRobot robot = new Robot(table, move, report);
-
-            robot.PlaceRobot(3, 3, "NORTH");
-            Action result = () => robot.TurnRobot("");
+            _robot.PlaceRobot(3, 3, "NORTH");
+            Action result = () => _robot.TurnRobot("");
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Empty turn command", exception.Message);

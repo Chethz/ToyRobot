@@ -9,15 +9,20 @@ namespace ToyRobotTests
 {
     public class ReportTests
     {
+        private IReport _report;
+
+        public ReportTests()
+        {
+            _report = new Report();
+        }
+
         [Fact]
         public void Print()
         {
-            IReport report = new Report();
-
             var output = new StringWriter();
             Console.SetOut(output);
 
-            report.Print(2, 2, Face.NORTH);
+            _report.Print(2, 2, Face.NORTH);
 
             var outputString = output.ToString();
 

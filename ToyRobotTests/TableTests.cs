@@ -1,16 +1,23 @@
 ﻿
 using ToyRobot;
+using ToyRobot.Interfaces;
 using Xunit;
 
 namespace ToyRobotTests
 {
     public class TableTests
     {
+        private ITable _table;
+
+        public TableTests()
+        {
+            _table = new Table(5, 5);
+        }
+
         [Fact]
         public void IsValidPlace_WhenValidPlace_ReturnTrue()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(3, 3);
+            var result = _table.IsValidPlace(3, 3);
 
             Assert.True(result);
         }
@@ -18,8 +25,7 @@ namespace ToyRobotTests
         [Fact]
         public void IsValidPlace_WhenXIsInValidPlace_ReturnFalse()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(6, 3);
+            var result = _table.IsValidPlace(6, 3);
 
             Assert.False(result);
         }
@@ -27,8 +33,7 @@ namespace ToyRobotTests
         [Fact]
         public void IsValidPlace_WhenYIsInValidPlace_ReturnFalse()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(3, 6);
+            var result = _table.IsValidPlace(3, 6);
 
             Assert.False(result);
         }
@@ -36,8 +41,7 @@ namespace ToyRobotTests
         [Fact]
         public void IsValidPlace_WhenBothAreInValidPlaces_ReturnFalse()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(6, 6);
+            var result = _table.IsValidPlace(6, 6);
 
             Assert.False(result);
         }
@@ -45,8 +49,7 @@ namespace ToyRobotTests
         [Fact]
         public void IsValidPlace_WhenValuesAreLessThanZero_ReturnFalse()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(-1, -6);
+            var result = _table.IsValidPlace(-1, -6);
 
             Assert.False(result);
         }
@@ -54,8 +57,7 @@ namespace ToyRobotTests
         [Fact]
         public void IsValidPlace_WhenValuesAreZero_ReturnTrue()
         {
-            Table table = new Table(5, 5);
-            var result = table.IsValidPlace(0, 0);
+            var result = _table.IsValidPlace(0, 0);
 
             Assert.True(result);
         }
