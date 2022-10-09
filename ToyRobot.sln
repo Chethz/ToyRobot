@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot", "ToyRobot.csproj", "{0D69A353-3D03-47BB-A61C-DEA3AEC97B96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot", "ToyRobot\ToyRobot.csproj", "{0D69A353-3D03-47BB-A61C-DEA3AEC97B96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotSimulator", "..\ToyRobotSimulator\ToyRobotSimulator.csproj", "{8DBF69ED-B454-4B32-8DD7-0413798EF624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotSimulator", "ToyRobotSimulator\ToyRobotSimulator.csproj", "{8DBF69ED-B454-4B32-8DD7-0413798EF624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotSimulatorTests", "..\ToyRobotSimulatorTests\ToyRobotSimulatorTests.csproj", "{409C29FF-4266-4163-B036-3113D89EF8CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotSimulatorTests", "ToyRobotSimulatorTests\ToyRobotSimulatorTests.csproj", "{409C29FF-4266-4163-B036-3113D89EF8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotTests", "..\ToyRobotTests\ToyRobotTests.csproj", "{E5D00AB4-FD18-4F10-9076-3367D9BF5D58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotTests", "ToyRobotTests\ToyRobotTests.csproj", "{E5D00AB4-FD18-4F10-9076-3367D9BF5D58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
