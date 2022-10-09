@@ -54,8 +54,8 @@ Output: 3, 3, NORTH <br />
 ### Running the solution:
 
 The application is written in Visual Studio 2022. The application is a .Net Core 3.1 application. RobotLibrary 
-contains all the functionalities of the robot. A robot Simulator is used to pass the given command to the robot library. Toy Robot Simulator console app is the main app and to start simulator this project need to run. When
-you run the console application, commands will be executed automatically and output displayed on the console window.
+contains all the functionalities of the robot. A robot Simulator is used to pass the given command to the RobotLibrary. ToyRobotSimulator console app is the main app and to start the simulator this project need to run. When
+you run the console application, commands will be executed automatically and output will be displayed on the console window.
 
 ### Running Unit Tests:
 
