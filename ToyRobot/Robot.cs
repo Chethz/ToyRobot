@@ -17,7 +17,6 @@ namespace ToyRobot
         int IRobot.XPosition { get => _xPosition; set => _xPosition = value; }
         int IRobot.YPosition { get => _yPosition; set => _yPosition = value; }
         Face IRobot.Face { get => _face; set => _face = value; }
-        public bool IsPlaced { get; }
 
         public Robot(ITable table, IMove move, IReport report)
         {
