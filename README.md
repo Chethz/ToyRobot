@@ -30,11 +30,11 @@ A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and 
 
 ### Example Input and Output:
 
-PLACE 0, 0, NORTH
-MOVE
-REPORT
+PLACE 0, 0, NORTH <br />
+MOVE <br />
+REPORT <br />
 
-Output: 0,1,NORTH
+Output: 0,1,NORTH <br />
 
 PLACE 0, 0, NORTH
 LEFT
