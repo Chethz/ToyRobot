@@ -5,22 +5,23 @@ using Xunit;
 using System;
 using ToyRobot.Enums;
 using System.IO;
+using System.Reflection;
 
 namespace ToyRobotSimulatorTests
 {
     public class ToyRobotSimulatorTests
     {
+        private Simulator _simulator;
+
+        public ToyRobotSimulatorTests()
+        {
+            _simulator = new Simulator();
+        }
+
         [Fact]
         public void ProcessCommand_WhenPassedInValidCommand_Throwexception()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
-
-            var Simulator = new Simulator(table, robot);
-
-            Action result = () => Simulator.ProcessCommand("RUN");
+            Action result = () => _simulator.ProcessCommand("RUN");
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Command is not valid : RUN", exception.Message);
@@ -29,78 +30,47 @@ namespace ToyRobotSimulatorTests
         [Fact]
         public void ProcessCommand_WhenPassedInValidPlaceCommand_Returnexception()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
-
-            var Simulator = new Simulator(table, robot);
-
-            Action result = () => Simulator.ProcessCommand("PLACE A, B, NORTH");
+            Action result = () => _simulator.ProcessCommand("PLACE A, B, NORTH");
 
             Exception exception = Assert.Throws<Exception>(result);
 
-            Assert.Equal("Invalid place command.", exception.Message);
+            Assert.Equal("Invalid X or Y command.", exception.Message);
         }
 
         [Fact]
         public void ProcessCommand_WhenPassedPlaceCommandWithTab_PlacedRobot()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE   2, 3, NORTH");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE   2, 3, NORTH");
-
-            Assert.Equal(2, robot.XPosition);
+            Assert.Equal(2, _robot.XPosition);
         }
 
 
         [Fact]
         public void ProcessCommand_WhenPlaceRobot_PlacedOnTable()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-
-            Assert.Equal(2, robot.XPosition);
+            Assert.Equal(2, _robot.XPosition);
         }
 
         [Fact]
         public void ProcessCommand_WhenMove_MoveRobot()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            _simulator.ProcessCommand("MOVE");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Simulator.ProcessCommand("MOVE");
-            Assert.Equal(3, robot.YPosition);
+            Assert.Equal(3, _robot.YPosition);
         }
 
         [Fact]
         public void ProcessCommand_WhenInvalidMove_ThrowException()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
-
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Action result = () => Simulator.ProcessCommand("MO0VE");
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            Action result = () => _simulator.ProcessCommand("MO0VE");
             Exception exception = Assert.Throws<Exception>(result);
 
             Assert.Equal("Command is not valid : MO0VE", exception.Message);
@@ -109,65 +79,41 @@ namespace ToyRobotSimulatorTests
         [Fact]
         public void ProcessCommand_WhenMoveWithSpaceAtFront_MoveRobot()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            _simulator.ProcessCommand(" MOVE");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Simulator.ProcessCommand(" MOVE");
-
-            Assert.Equal(3, robot.YPosition);
+            Assert.Equal(3, _robot.YPosition);
         }
 
         [Fact]
         public void ProcessCommand_WhenTurnLeft_TurnRobot()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            _simulator.ProcessCommand("LEFT");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Simulator.ProcessCommand("LEFT");
-
-            Assert.Equal(Face.WEST, robot.Face);
+            Assert.Equal(Face.WEST, _robot.Face);
         }
 
         [Fact]
         public void ProcessCommand_WhenTurnRight_TurnRobot()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            _simulator.ProcessCommand("RIGHT");
+            IRobot _robot = (IRobot)_simulator.GetType().GetField("_robot", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_simulator);
 
-            var Simulator = new Simulator(table, robot);
-
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Simulator.ProcessCommand("RIGHT");
-
-            Assert.Equal(Face.EAST, robot.Face);
+            Assert.Equal(Face.EAST, _robot.Face);
         }
 
         [Fact]
         public void ProcessCommand_WhenReport_PrintReport()
         {
-            ITable table = new Table(5, 5);
-            IMove move = new Move();
-            IReport report = new Report();
-            IRobot robot = new Robot(table, move, report);
-
-            var Simulator = new Simulator(table, robot);
             var output = new StringWriter();
             Console.SetOut(output);
 
-            Simulator.ProcessCommand("PLACE 2, 2, NORTH");
-            Simulator.ProcessCommand("REPORT");
+            _simulator.ProcessCommand("PLACE 2, 2, NORTH");
+            _simulator.ProcessCommand("REPORT");
 
             var outputString = output.ToString();
 

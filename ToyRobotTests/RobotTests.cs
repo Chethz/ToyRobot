@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using ToyRobot;
 using ToyRobot.Enums;
 using ToyRobot.Interfaces;
@@ -88,11 +89,15 @@ namespace ToyRobotTests
         }
 
         [Fact]
-        public void Move_WhenIsPlacedFalse_ReturnNegetiveOne()
+        public void Move_WhenIsPlacedFalse_IgnoreMove()
         {
+            var xBeforeMove = _robot.XPosition;
+            var yBeforeMove = _robot.YPosition;
+
             _robot.Move();
 
-            Assert.Equal(-1, _robot.XPosition);
+            Assert.Equal(xBeforeMove, _robot.XPosition);
+            Assert.Equal(yBeforeMove, _robot.YPosition);
         }
 
         [Fact]
