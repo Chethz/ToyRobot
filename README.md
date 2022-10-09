@@ -9,11 +9,11 @@ as commands line inputs.
 
 ### Sample commands should be in the following format:
 
-PLACE X,Y,DIRECTION
-MOVE
-LEFT
-RIGHT
-REPORT
+PLACE X,Y,DIRECTION <br />
+MOVE <br />
+LEFT <br />
+RIGHT <br />
+REPORT <br />
 
 PLACE: will put the toy robot on the table in positions X, Y and facing NORTH, SOUTH, EAST or WEST. (0,0) can be considered as the SOUTH WEST corner
 and (5,5) as the NORTH EAST corner. The first valid command to the robot is a PLACE command. After that, any sequence of commands may be issued, 
@@ -36,20 +36,20 @@ REPORT <br />
 
 Output: 0,1,NORTH <br />
 
-PLACE 0, 0, NORTH
-LEFT
-REPORT
+PLACE 0, 0, NORTH <br />
+LEFT <br />
+REPORT <br />
 
-Output: 0, 0, WEST
+Output: 0, 0, WEST <br />
 
-PLACE 1, 2, EAST
-MOVE
-MOVE
-LEFT
-MOVE
-REPORT
+PLACE 1, 2, EAST <br />
+MOVE <br />
+MOVE <br />
+LEFT <br />
+MOVE <br />
+REPORT <br />
 
-Output: 3, 3, NORTH
+Output: 3, 3, NORTH <br />
 
 ### Running the solution:
 
